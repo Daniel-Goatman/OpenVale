@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-test:
+    strategy:
+      matrix:
+        os: [macos-14, macos-15]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reject bundled wallpaper media
+        run: |
+          if find . -type f \( -iname '*.mp4' -o -iname '*.mov' -o -iname '*.m4v' -o -iname '*.webm' \) | grep -q .; then
+            echo 'Wallpaper media must not be committed.' >&2
+            exit 1
+          fi
+      - name: Test
+        run: swift test
+      - name: Package
+        run: ./scripts/package.sh
+      - name: Verify app
+        run: |
+          test -x dist/OpenVale.app/Contents/MacOS/OpenVale
+          test -f dist/OpenVale.app/Contents/Resources/OpenVale.icns
+          codesign --verify --deep --strict dist/OpenVale.app

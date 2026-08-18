@@ -1,0 +1,11 @@
+.DS_Store
+.build/
+dist/
+*.xcodeproj/
+*.xcworkspace/
+
+# Wallpaper media is user-owned and must never be published with the app.
+*.mp4
+*.mov
+*.m4v
+*.webm
