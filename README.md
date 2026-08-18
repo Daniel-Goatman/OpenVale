@@ -1,6 +1,6 @@
 # OpenVale
 
-![OpenVale icon](Packaging/AppIcon.png)
+<img src="Packaging/AppIcon.png" alt="OpenVale icon" width="160">
 
 OpenVale is a small, native macOS menu-bar app that plays your own local video
 files behind the desktop icons. It stays out of the Dock, can launch at login,
